@@ -25,7 +25,7 @@ class Worker(object):
 
     def socket_listen(self):
         # start a socket server, listening to 10087
-        server = SocketServer.TCPServer(("localhost", 10087), TCPHander)
+        server = SocketServer.TCPServer((self.worker_name, 10087), TCPHander)
         print "Worker socket server starts at 10087"
         t = threading.Thread(target=server.serve_forever)
         t.start()
@@ -54,7 +54,7 @@ def main():
     worker = Worker(worker_name)
     worker.socket_listen()
 
-    daemon = Pyro4.Daemon(port=10086)
+    daemon = Pyro4.Daemon(host=worker_name, port=10086)
     uri = daemon.register(worker, worker_name)
 
     print "Worker starts at %s" % uri
