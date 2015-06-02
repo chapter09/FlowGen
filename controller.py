@@ -1,12 +1,16 @@
 __author__ = 'wanghao'
 
-from multiprocessing import Process
 import os
+import threading
+import socket
 import Pyro4
 
 class Controller(object):
     def __init__(self):
-        self.clients = []
+        # client URI format is PYRO:IP@hostname:port
+        # e.g.: PYRO:202.120.1.101@localhost:10086
+
+        self.clients = ["PYRO:202.120.1.101@localhost:10086"]
         self.conf = {}
 
     def read_conf(self):
@@ -21,12 +25,12 @@ class Controller(object):
 
 def main():
     controller = Controller()
-    p = Process(target=Pyro4.naming.startNS)
-    p.start()
 
-    print "TEST"
+    for client in controller.clients:
+        worker = Pyro4.core.Proxy(client)
+        print(worker.who())
+        worker.run_flow("localhost", 10087, 502400)
 
-    p.join() # this blocks until the process terminates
 
 
 if __name__ == '__main__':
