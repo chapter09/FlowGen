@@ -29,7 +29,7 @@ def main():
     for client in controller.clients:
         worker = Pyro4.core.Proxy(client)
         print(worker.who())
-        worker.run_flow("202.120.32.219", 10087, 502400)
+        worker.run_flow("202.120.32.219", 10087, 502400000)
 
 
 

@@ -16,6 +16,7 @@ class TCPHander(SocketServer.StreamRequestHandler):
             if not data:
                 break
             recv_data += data
+            print data
 
         print len(recv_data)
 
@@ -34,7 +35,8 @@ class Worker(object):
 
         def run(dst_ip, port, size):
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            data = os.urandom(size)
+            # data = os.urandom(size)
+            data = "1234567890"*size
             try:
                 sock.connect((dst_ip, port))
                 sock.sendall(data)
