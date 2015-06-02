@@ -5,4 +5,10 @@
     <orderEntry type="jdk" jdkName="Python 2.7.9 virtualenv at C:\Users\v-whao\Documents\Code\FlowGen_dep" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PackageRequirementsSettings">
+    <option name="requirementsPath" value="C:\Users\v-whao\Documents\Code\FlowGen\requirements.txt" />
+  </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+  </component>
 </module>
