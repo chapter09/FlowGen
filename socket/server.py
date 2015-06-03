@@ -24,7 +24,7 @@ class TCPThreadingServer(ThreadingMixIn, TCPServer):
     pass
 
 
-def main():
+if __name__ == '__main__':
     port = int(sys.argv[1])
     try:
         # start a socket server, listening to 10087
@@ -35,6 +35,3 @@ def main():
         # socket_t.start()
     except KeyboardInterrupt:
         exit(0)
-
-if __name__ == '__main__':
-    main()
