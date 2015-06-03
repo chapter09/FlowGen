@@ -1,25 +1,34 @@
 __author__ = 'v-whao'
 
 import sys
-import SocketServer
+from SocketServer import *
 
-class TCPHander(SocketServer.StreamRequestHandler):
+class TCPHander(StreamRequestHandler):
     def handle(self):
-        recv_data = ""
-        while 1:
-            data = self.request.recv(1024)
-            if not data:
-                break
-            recv_data += data
+        print "start"
+        # recv_data = ""
+        try:
+            while 1:
+                data = self.request.recv(1024000)
+                if not data:
+                    break
+                # recv_data += data
 
-        print len(recv_data)
+        except MemoryError:
+            print "Memory Error"
+        # print len(recv_data)
+        print "end"
+
+
+class TCPThreadingServer(ThreadingMixIn, TCPServer):
+    pass
+
 
 def main():
-
     port = int(sys.argv[1])
     try:
         # start a socket server, listening to 10087
-        server = SocketServer.TCPServer(("localhost", port), TCPHander)
+        server = TCPThreadingServer(("0.0.0.0", port), TCPHander)
         print "Socket server starts at %d" % port
         # socket_t = threading.Thread(target=server.serve_forever)
         server.serve_forever()
