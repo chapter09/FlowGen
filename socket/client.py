@@ -5,6 +5,7 @@ import sys
 import socket
 from struct import *
 import time
+import threading
 
 def run_flow(dst_ip, port, size):
 
@@ -30,21 +31,34 @@ def run_flow(dst_ip, port, size):
         finally:
             sock.close()
 
-    # t = threading.Thread(target=run(dst_ip, port, size))
-    # t.start()
-    run(dst_ip, port, size)
+    t = threading.Thread(target=run(dst_ip, port, size))
+    t.start()
+    t.join()
+    print "Done"
+    #run(dst_ip, port, size)
 
 
 if __name__ == '__main__':
     dst_ip = sys.argv[1]
     port = int(sys.argv[2])
-    size = int(sys.argv[3])
+    size = int(float(sys.argv[3]))
+
+    fd = open("fct.txt", 'a')
 
     print "Flow Size:", size
-    start_t = time.time()
-    print "Start:", time.strftime("%M:%S")
-    run_flow(dst_ip, port, size)
-    end_t = time.time()
-    print "End:", time.strftime("%M:%S")
+    fd.write("Flow Size %d " % size)
 
-    print "Duration:", end_t - start_t
+    start_t = time.time()
+    #print "Start:", time.strftime("%M:%S")
+    fd.write("Start: %s " % time.strftime("%M:%S"))
+
+    run_flow(dst_ip, port, size)
+
+    end_t = time.time()
+    #print "End:", time.strftime("%M:%S")
+
+    fd.write("End: %s " % time.strftime("%M:%S"))
+    #print "Duration:", end_t - start_t
+
+    fd.write("Duration: %f \r\n" % (end_t - start_t))
+    fd.close()
