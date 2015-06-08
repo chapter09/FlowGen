@@ -3,6 +3,7 @@ __author__ = 'v-whao'
 import time
 from SocketServer import *
 from socket import error as SocketError
+import sys
 
 class TCPHandler(StreamRequestHandler):
     def handle(self):
