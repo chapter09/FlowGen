@@ -16,7 +16,6 @@ class EchoHandler(asyncore.dispatcher_with_send):
 
         try:
             while 1:
-                print "%f" % time.time()
                 data = self.recv(12800)
                 if not data:
                     break
@@ -27,8 +26,8 @@ class EchoHandler(asyncore.dispatcher_with_send):
             print e
 
         end_time = time.time()
-        log = "From: %s Size: %d Start: %f End: %f Duration: %f" % \
-              (self.client_address, size, start_time, end_time, end_time - start_time)
+        log = "Size: %d Start: %f End: %f Duration: %f" % \
+              (size, start_time, end_time, end_time - start_time)
         print log
 
 
@@ -51,5 +50,5 @@ class EchoServer(asyncore.dispatcher):
 
 if __name__ == "__main__":
 
-    server = EchoServer('0.0.0.0', int(sys.argv[0]))
+    server = EchoServer('0.0.0.0', int(sys.argv[1]))
     asyncore.loop()
