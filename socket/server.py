@@ -7,8 +7,8 @@ import sys
 
 class TCPHandler(StreamRequestHandler):
     def handle(self):
-        # log_fd = open("./FlowGen.txt", "a")
-        start_time = time.time()
+        log_fd = open("./FlowGen.txt", "a")
+        start_time = time.clock()
         size = 0
 
         try:
@@ -23,12 +23,12 @@ class TCPHandler(StreamRequestHandler):
         except SocketError as e:
             print e
 
-        end_time = time.time()
-        log = "From: %s Size: %d Start: %f End: %f Duration: %f" % \
+        end_time = time.clock()
+        log = "From: %s Size: %d Start: %f End: %f Duration: %f\n" % \
               (self.client_address, size, start_time, end_time, end_time - start_time)
 
         print log
-        #log_fd.write(log + "\n")
+        log_fd.write(log + "\n")
 
 
 if __name__ == '__main__':

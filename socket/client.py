@@ -45,16 +45,17 @@ if __name__ == '__main__':
 
     fd = open("fct.txt", 'w')
 
-    print "Flow Size:", size
+    #print "Flow Size:", size
     fd.write("Flow Size %d " % size)
 
-    start_t = time.time()
+    start_t = time.clock()
     #print "Start:", time.strftime("%M:%S")
+
     fd.write("Start: %s " % time.strftime("%M:%S"))
 
     run_flow(dst_ip, port, size)
 
-    end_t = time.time()
+    end_t = time.clock()
     #print "End:", time.strftime("%M:%S")
 
     fd.write("End: %s " % time.strftime("%M:%S"))
