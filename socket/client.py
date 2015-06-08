@@ -43,7 +43,7 @@ if __name__ == '__main__':
     port = int(sys.argv[2])
     size = int(float(sys.argv[3]))
 
-    fd = open("fct.txt", 'a')
+    fd = open("fct.txt", 'w')
 
     print "Flow Size:", size
     fd.write("Flow Size %d " % size)
