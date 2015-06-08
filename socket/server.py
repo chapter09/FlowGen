@@ -7,13 +7,13 @@ import sys
 
 class TCPHandler(StreamRequestHandler):
     def handle(self):
-        log_fd = open("./FlowGen.txt", "a")
+        # log_fd = open("./FlowGen.txt", "a")
         start_time = time.time()
         size = 0
 
         try:
             while 1:
-                print "%f" % time.time()
+                # print "%f" % time.time()
                 data = self.request.recv(12800)
                 if not data:
                     break
@@ -28,7 +28,7 @@ class TCPHandler(StreamRequestHandler):
               (self.client_address, size, start_time, end_time, end_time - start_time)
 
         print log
-        log_fd.write(log + "\n")
+        #log_fd.write(log + "\n")
 
 
 if __name__ == '__main__':
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     port = int(sys.argv[1])
     try:
         # start a socket server, listening to 10087
-        server = ForkingTCPServer(("0.0.0.0", port), TCPHandler)
+        server = ThreadingTCPServer(("0.0.0.0", port), TCPHandler)
         print "Socket server starts at %d" % port
         # socket_t = threading.Thread(target=server.serve_forever)
         server.serve_forever()
