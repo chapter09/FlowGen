@@ -35,7 +35,7 @@ if __name__ == '__main__':
     port = int(sys.argv[1])
     try:
         # start a socket server, listening to 10087
-        server = ThreadingTCPServer(("0.0.0.0", port), TCPHandler)
+        server = ForkingTCPServer(("0.0.0.0", port), TCPHandler)
         print "Socket server starts at %d" % port
         # socket_t = threading.Thread(target=server.serve_forever)
         server.serve_forever()
