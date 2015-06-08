@@ -58,7 +58,7 @@ if __name__ == '__main__':
     #print "End:", time.strftime("%M:%S")
 
     fd.write("End: %s " % time.strftime("%M:%S"))
-    #print "Duration:", end_t - start_t
+    print "Duration:", end_t - start_t
 
     fd.write("Duration: %f \r\n" % (end_t - start_t))
     fd.close()
