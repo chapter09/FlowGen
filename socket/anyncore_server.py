@@ -4,6 +4,7 @@ __author__ = 'v-whao'
 import asyncore
 import socket
 import time
+import sys
 from socket import error as SocketError
 
 
@@ -50,5 +51,5 @@ class EchoServer(asyncore.dispatcher):
 
 if __name__ == "__main__":
 
-    server = EchoServer('localhost', 8080)
+    server = EchoServer('0.0.0.0', int(sys.argv[0]))
     asyncore.loop()
